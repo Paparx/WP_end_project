@@ -1,0 +1,430 @@
+/* --- Reset / base --- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  font-size: 1rem; /* 16px */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Theme variables (light default) */
+:root{
+  --primary: #1a73e8;
+  --primary-700: #0d47a1;
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --header-bg-start: var(--primary);
+  --header-bg-end: var(--primary-700);
+  --footer-bg-start: var(--primary);
+  --footer-bg-end: var(--primary-700);
+  --radius: 10px;
+  --shadow-sm: 0 6px 18px rgba(17,24,39,0.06);
+  --shadow-md: 0 10px 30px rgba(17,24,39,0.09);
+  --container-pad: 1rem;
+  --transition-fast: 160ms;
+  --transition-med: 260ms;
+  --transition-slow: 420ms;
+}
+
+/* Dark theme variables applied when html[data-theme="dark"] is set */
+html[data-theme="dark"] {
+  --primary: #7aa7ff;
+  --primary-700: #4b82d6;
+  --bg: #0b1020;
+  --surface: #0f1724;
+  --text: #e6eef8;
+  --muted: #98a1b3;
+  --header-bg-start: #0b1220;
+  --header-bg-end: #081028;
+  --footer-bg-start: #081028;
+  --footer-bg-end: #021027;
+  --shadow-sm: 0 6px 18px rgba(2,6,23,0.6);
+  --shadow-md: 0 10px 30px rgba(2,6,23,0.7);
+}
+
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  :root { --transition-fast: 1ms; --transition-med: 1ms; --transition-slow: 1ms; }
+  * { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height:50vh; 
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--transition-med), color var(--transition-med);
+}
+
+/* --- Utility container --- */
+.container {
+  width: calc(100% - 2 * var(--container-pad));
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* ================= Header ================= */
+header {
+  background: linear-gradient(180deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
+  padding: 14px 0;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: var(--shadow-sm);
+  transform: translateZ(0);
+  transition: background-color var(--transition-med), box-shadow var(--transition-med);
+}
+
+/* header inner layout */
+header h2 { margin: 0 12px; font-size: 1.1rem; font-weight: 700; }
+header nav { display:flex; gap:10px; align-items:center; }
+
+/* theme toggle button */
+#theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width:40px;
+  height:36px;
+  border-radius:8px;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+#theme-toggle:hover { transform: translateY(-2px); }
+html[data-theme="dark"] #theme-toggle { background: rgba(255,255,255,0.06); color: var(--text); }
+
+/* subtle header shrink on small screens (visual balance) */
+@media (max-width: 480px) {
+  header { padding: 10px 0; }
+}
+
+/* header links */
+header a {
+  color: white;
+  margin: 0 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+header a:hover,
+header a:focus { text-decoration: underline; transform: translateY(-2px); }
+
+/* keyboard focus indicator */
+:focus-visible {
+  outline: 3px solid rgba(26,115,232,0.16);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ================= Hero ================= */
+/* animated gradient background + entrance for content */
+@keyframes heroGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero {
+  text-align: center;
+  padding: clamp(2.75rem, 7vw, 6rem) 1rem;
+  color: white;
+  background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary) 60%);
+  background-size: 200% 200%;
+  animation: heroGradient 12s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* hero content entrance */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  line-height: 1.05;
+  font-weight: 700;
+  animation: fadeInUp var(--transition-slow) ease both;
+}
+
+.hero p {
+  margin: 0.6rem auto 1.4rem;
+  max-width: 70ch;
+  color: rgba(255,255,255,0.95);
+  animation: fadeInUp calc(var(--transition-slow) + 120ms) ease both;
+}
+
+/* CTA button style inside hero (if used) */
+.hero .btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--primary-700);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  border: none;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.hero .btn:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+/* ================= Buttons & controls ================= */
+button, .btn {
+  padding: 12px 25px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+button:hover,
+.btn:hover {
+  background: var(--primary-700);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+button:active { transform: translateY(-1px); }
+
+/* ================= Search Box ================= */
+.search-box {
+  width: 50%;
+  margin: 20px auto;
+  transition: width var(--transition-med), transform var(--transition-med);
+}
+
+@media (max-width: 900px) {
+  .search-box { width: 70%; }
+}
+@media (max-width: 560px) {
+  .search-box { width: 92%; margin: 14px auto; }
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 6px 18px rgba(17,24,39,0.03);
+}
+
+input[type="text"]::placeholder { color: var(--muted); }
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary-700);
+  box-shadow: 0 8px 24px rgba(26,115,232,0.12);
+  transform: translateY(-1px);
+}
+
+/* subtle pulsate when empty and focused (optional) */
+input[type="text"].pulse:focus {
+  animation: pulseBorder 1.4s infinite;
+}
+@keyframes pulseBorder {
+  0% { box-shadow: 0 8px 24px rgba(26,115,232,0.10); }
+  50% { box-shadow: 0 10px 30px rgba(26,115,232,0.14); }
+  100% { box-shadow: 0 8px 24px rgba(26,115,232,0.10); }
+}
+
+/* ================= Cards (grid + animation) ================= */
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 28px 12px;
+}
+
+/* card entrance - stagger can be added with JS by adding style="animation-delay: .xxs" */
+@keyframes cardPop {
+  from { opacity: 0; transform: translateY(12px) scale(.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.card {
+  background: var(--surface);
+  width: 280px;
+  padding: 20px;
+  margin: 0; /* gaps handled by container */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-med), box-shadow var(--transition-med), box-shadow var(--transition-fast);
+  transform-origin: center;
+  animation: cardPop var(--transition-slow) ease both;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+}
+
+/* better responsive card sizing */
+@media (max-width: 900px) {
+  .card { width: calc(50% - 28px); max-width: 320px; }
+}
+@media (max-width: 560px) {
+  .card { width: calc(100% - 24px); }
+}
+
+/* ================= Article card variant ================= */
+.article-card { width: 320px; }
+
+/* ================= Contact Box ================= */
+.contact-box {
+  width: 50%;
+  background: var(--surface);
+  padding: 25px;
+  margin: 30px auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: width var(--transition-med), transform var(--transition-fast);
+}
+
+@media (max-width: 900px) {
+  .contact-box { width: 80%; }
+}
+@media (max-width: 560px) {
+  .contact-box { width: 94%; padding: 18px; }
+}
+
+/* inputs inside contact */
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(15,23,42,0.06);
+  margin-bottom: 10px;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  background: var(--surface);
+  color: var(--text);
+}
+.contact-box input:focus,
+.contact-box textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 8px 20px rgba(26,115,232,0.08);
+  transform: translateY(-2px);
+}
+
+/* ================= Result / details box (if present) ================= */
+#result, .result {
+  width: 90%;
+  max-width: 900px;
+  margin: 26px auto;
+  background: var(--surface);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeInUp var(--transition-med) ease both;
+}
+
+/* small key/value style */
+.kv { display:inline-block; color: var(--muted); font-weight: 600; margin-right: 8px; }
+
+/* ================= Footer (improved + animation) ================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, var(--footer-bg-start), var(--footer-bg-end));
+  color: white;
+  margin-top: 40px;
+  border-top: 2px solid rgba(255,255,255,0.12);
+  font-size: 0.9375rem;
+  letter-spacing: 0.3px;
+  animation: fadeIn var(--transition-slow) ease both;
+  transition: background-color var(--transition-med), transform var(--transition-fast);
+}
+
+/* footer links */
+footer a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  margin: 0 10px;
+  opacity: 0.9;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+footer a:hover,
+footer a:focus { opacity: 1; transform: translateY(-2px); text-decoration: underline; }
+
+footer .footer-links { margin-top: 8px; }
+footer .credit { margin-top: 10px; opacity: 0.9; font-size: 0.875rem; }
+
+/* small devices: make footer padding smaller */
+@media (max-width: 480px) {
+  footer { padding: 18px 12px; font-size: 0.85rem; }
+  footer a { display: inline-block; margin: 6px 6px; }
+}
+
+/* ================= Micro-interactions / small utilities ================= */
+/* subtle hover for links outside header/footer */
+a { color: inherit; transition: color var(--transition-fast), opacity var(--transition-fast); }
+a:hover { text-decoration: underline; }
+
+/* small badges */
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(26,115,232,0.08);
+  color: var(--primary-700);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* spacing utils */
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mb-2 { margin-bottom: 16px; }
+.center { text-align: center; }
+
+/* ================= Accessibility extras ================= */
+/* Hide focus styles only for mouse users but show for keyboard (if supported) */
+@media (hover: hover) {
+  :focus:not(:focus-visible) { outline: none; }
+}
+
+/* prefer dark theme if user system prefers and no explicit choice saved */
+@media (prefers-color-scheme: dark) {
+  :root { }
+  /* script will still respect stored preference; this is a visual default only */
+}
+
+/* end of css */
