@@ -1,42 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Contact | Legal Resource Hub</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
+
 <body>
 
-<header>
-    <h2>Legal Resource Hub</h2>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="crime.html">Crime Punishments</a>
-        <a href="contact.html">Contact</a>
-        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-    </nav>
-</header>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo"><span>⚖️</span> Legal Resource Hub</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="crime.html">Search</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-<h1 style="text-align:center; margin-top:40px;">Contact Us</h1>
+    <section class="container contact-section">
+        <div class="section-centered">
+            <h1>Get in Touch</h1>
+            <p>Questions? Suggestions? We'd love to hear from you.</p>
+        </div>
 
-<div class="contact-box">
-    <input type="text" placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:10px;">
-    <input type="email" placeholder="Your Email" style="width:100%; padding:12px; margin-bottom:10px;">
-    <textarea placeholder="Message" rows="5" style="width:100%; padding:12px;margin-bottom:10px;"></textarea>
-    <br><br>
-    <button>Send Message</button>
-</div>
+        <div class="card form-card">
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" placeholder="John Doe">
+                </div>
 
-<footer>
-    © 2025 Legal Resource Hub 
-    <div class="footer-links">
-        <a href="index.html">Home</a> |
-        <a href="crime.html">Crime Info</a> |
-        <a href="contact.html">Contact</a>
-    </div>
-</footer>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="john@example.com">
+                </div>
 
-<script src="script.js" ></script>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-input" rows="5" placeholder="Your message..."></textarea>
+                </div>
+
+                <button type="button" class="btn w-100">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <span class="logo">⚖️ Legal Resource Hub</span>
+                    <p>Empowering legal minds.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!')">
+                        <input type="email" class="newsletter-input" placeholder="Enter email..." required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+                <div>
+                    <h4>Links</h4>
+                    <div class="footer-col">
+                        <a href="index.html">Home</a>
+                        <a href="crime.html">Search</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <p class="legal-text">© 2025 Legal Hub.<br>Educational use only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
+
 </html>

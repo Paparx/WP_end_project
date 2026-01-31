@@ -1,63 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
     <title>Legal Resource Hub</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
+
 <body>
 
-<header>
-    <h2>Legal Resource Hub</h2>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="crime.html">Crime Punishments</a>
-        <!-- <a href="articles.html">Articles</a> -->
-        <a href="contact.html">Contact</a>
-        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-    </nav>
-</header>
-
-<section class="hero">
-    <h1>Your Legal Resource Search Starts Here</h1>
-    <p>Find legal details, IPC sections, punishments & more.</p>
-    <a href="crime.html"><button>Search Crimes</button></a>
-</section>
-
-<section>
-    <h2>Popular Legal Categories</h2>
-
-    <div class="card-container">
-        <div class="card">
-            <h3>Cyber Crime</h3>
-            <p>Online fraud, hacking, identity theft and more.</p>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo"><span>⚖️</span> Legal Resource Hub</a>
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="crime.html">Search</a>
+                <a href="contact.html">Contact</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="card">
-            <h3>Property Crime</h3>
-            <p>Theft, burglary, robbery & illegal possession.</p>
+    <section class="hero">
+        <div class="container">
+            <h1>Justice at Your Fingertips</h1>
+            <p>A comprehensive, searchable database of the Indian Penal Code.</p>
+            <a href="crime.html" class="btn">Explore Database</a>
         </div>
+    </section>
 
-        <div class="card">
-            <h3>Violent Crime</h3>
-            <p>Murder, assault, kidnapping, domestic violence.</p>
+    <section class="container">
+        <div class="grid-3">
+            <a href="crime.html" class="card">
+                <div class="card-icon">📚</div>
+                <h3>Library</h3>
+                <p>Access detailed information on hundreds of crimes and punishments.</p>
+            </a>
+            <a href="crime.html" class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Search</h3>
+                <p>Find what you need instantly with our smart search engine.</p>
+            </a>
+            <a href="crime.html?filter=high-severity" class="card">
+                <div class="card-icon">🧠</div>
+                <h3>Simplified</h3>
+                <p>Complex legal jargon broken down into simple ingredients.</p>
+            </a>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    © 2025 Legal Resource Hub  
-    <div class="footer-links">
-        <a href="index.html">Home</a> |
-        <a href="crime.html">Crime Punishments</a> |
-        <a href="contact.html">Contact</a>
-    </div>
-</footer>
+    <section class="container section-centered">
+        <h2>Legal Categories</h2>
+        <div class="filters">
+            <a href="crime.html?q=cyber" class="filter-chip">Cyber Crime</a>
+            <a href="crime.html?q=domestic" class="filter-chip">Domestic</a>
+            <a href="crime.html?q=theft" class="filter-chip">Property</a>
+            <a href="crime.html?q=traffic" class="filter-chip">Traffic</a>
+        </div>
+    </section>
 
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <span class="logo">⚖️ Legal Resource Hub</span>
+                    <p>Empowering legal minds.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!')">
+                        <input type="email" class="newsletter-input" placeholder="Enter email..." required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+                <div>
+                    <h4>Links</h4>
+                    <div class="footer-col">
+                        <a href="index.html">Home</a>
+                        <a href="crime.html">Search</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <p class="legal-text">© 2025 Legal Resource Hub.<br>Educational use only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-
-<script src="./script.js"></script>
-
+    <script src="script.js"></script>
 </body>
+
 </html>

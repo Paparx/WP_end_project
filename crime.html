@@ -1,44 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crime Information</title>
+    <title>Search | Legal Resource Hub</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
+
 <body>
-    
+
     <header>
-        <h2>Legal Resource Hub</h2>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="crime.html">Crime Punishments</a>
-            <a href="contact.html">Contact</a>
-            <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-        </nav>
+        <div class="container">
+            <a href="index.html" class="logo"><span>⚖️</span> Legal Resource Hub</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="crime.html" class="active">Search</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
-    
-    <h1 style="text-align:center; margin-top:40px;">Search Crimes </h1>
-    
-    <div class="search-box">
-        <input type="text" id="crimeInput" placeholder="Enter crime name (e.g., theft, murder, fraud)">
-    </div>
-    
-    <center><button onclick="searchCrime()">Search</button></center>
 
-    <!-- result container -->
-    <div id="result" class="result" style="margin-top:20px;"></div>
-    
+    <section class="container section-pad-top">
+        <div class="search-header">
+            <h1>Database Search</h1>
+            <p>Search by offense name, section, or keywords.</p>
+
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input"
+                    placeholder="Search by section, keyword, or law type...">
+            </div>
+
+            <div class="filter-group">
+                <div class="filters" id="typeFilters">
+                    <button class="filter-chip active" data-filter="all">All Records</button>
+                    <button class="filter-chip" data-filter="cognizable">Cognizable</button>
+                    <button class="filter-chip" data-filter="bailable">Bailable</button>
+                    <button class="filter-chip" data-filter="non-bailable">Non-Bailable</button>
+                    <button class="filter-chip" data-filter="high-severity">High Severity</button>
+                </div>
+            </div>
+
+            <div class="filter-group" style="margin-top: 15px;">
+                <div class="filters" id="categoryFilters">
+                    <button class="filter-chip" data-cat="Criminal">Criminal</button>
+                    <button class="filter-chip" data-cat="Civil">Civil</button>
+                    <button class="filter-chip" data-cat="Family">Family</button>
+                    <button class="filter-chip" data-cat="Tax">Tax</button>
+                    <button class="filter-chip" data-cat="POCSO">POCSO</button>
+                    <button class="filter-chip" data-cat="Data Protection">Data Privacy</button>
+                    <button class="filter-chip" data-cat="Forest">Forest</button>
+                    <button class="filter-chip" data-cat="Animal">Animal</button>
+                    <button class="filter-chip" data-cat="Procedural">Procedural</button>
+                    <button class="filter-chip" data-cat="Special Powers">Special Powers</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultsGrid" class="results-grid">
+            <div class="msg-empty">Loading database...</div>
+        </div>
+        <div class="center">
+            <button id="loadMoreBtn" class="btn">Show More Results</button>
+        </div>
+    </section>
+
+    <!-- Detailed Legal Modal -->
+    <div class="modal-overlay" id="crimeModal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-content">
+                <h2 id="modalTitle">Loading...</h2>
+                <p class="section-badge" id="modalSection">Section</p>
+
+                <div class="modal-info-grid">
+                    <div class="info-item"><strong>Severity:</strong> <span id="modalSeverity">-</span></div>
+                    <div class="info-item"><strong>Cognizable:</strong> <span id="modalCognizable">-</span></div>
+                    <div class="info-item"><strong>Bailable:</strong> <span id="modalBailable">-</span></div>
+                    <div class="info-item"><strong>Compoundable:</strong> <span id="modalCompoundable">-</span></div>
+                </div>
+
+                <div class="modal-details">
+                    <h3>Description</h3>
+                    <p id="modalDesc">Full legal description will appear here.</p>
+
+                    <h3>Legal Ingredients</h3>
+                    <ul id="modalIngredients"></ul>
+
+                    <h3>Punishment</h3>
+                    <p id="modalPunishment" class="punishment-box"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
-    © 2025 Legal Resource Hub  
-    <div class="footer-links">
-        <a href="index.html">Home</a> |
-        <a href="crime.html">Crime Punishments</a> |
-        <a href="contact.html">Contact</a>
-    </div>
-</footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <span class="logo">⚖️ Legal Resource Hub</span>
+                    <p>Empowering legal minds.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!')">
+                        <input type="email" class="newsletter-input" placeholder="Enter email..." required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+                <div>
+                    <h4>Links</h4>
+                    <div class="footer-col">
+                        <a href="index.html">Home</a>
+                        <a href="crime.html">Search</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <p class="legal-text">© 2025 Legal Hub.<br>Educational use only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    
-    <script src="script.js" ></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
