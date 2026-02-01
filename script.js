@@ -26,6 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       allCrimes = Array.isArray(data) ? data : (data.crimes || []);
       window.allCrimesData = allCrimes; // For global modal access
+
+      // Check URL for category filter
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlCat = urlParams.get('cat');
+      if (urlCat) {
+        categoryChips.forEach(chip => {
+          if (chip.dataset.cat === urlCat) {
+            categoryChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+          }
+        });
+      }
+
       applyFilters(); // Initial render
     })
     .catch(error => {
@@ -118,6 +131,20 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMoreBtn.addEventListener('click', () => {
       itemsShown += PAGE_SIZE;
       renderResults();
+    });
+  }
+
+  // --- 6. CONTACT FORM HANDLING ---
+  const contactForm = document.getElementById('contactForm');
+  const contactInterface = document.getElementById('contactInterface');
+  const successState = document.getElementById('successState');
+
+  if (contactForm && contactInterface && successState) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      contactInterface.style.display = 'none';
+      successState.style.display = 'block';
+      successState.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   }
 });

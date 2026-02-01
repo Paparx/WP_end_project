@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Legal Resource Hub</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 
 <body>
@@ -23,31 +21,51 @@
         </div>
     </header>
 
-    <section class="container contact-section">
-        <div class="section-centered">
-            <h1>Get in Touch</h1>
-            <p>Questions? Suggestions? We'd love to hear from you.</p>
+    <section class="hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get professional legal support and guidance.</p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 60px 0;">
+        <div id="contactInterface" class="card" style="max-width: 600px; margin: 0 auto; padding: 40px;">
+            <div class="section-centered" style="margin-bottom: 30px;">
+                <h2>Send a Message</h2>
+                <p>Fill out the form below and we'll get back to you shortly.</p>
+            </div>
+
+            <form id="contactForm">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Full Name</label>
+                    <input type="text" id="contactName" class="form-input" placeholder="Enter your name" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Email Address</label>
+                    <input type="email" id="contactEmail" class="form-input" placeholder="name@email.com" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 30px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Describe Your Query</label>
+                    <textarea id="contactMessage" class="form-input" rows="5" placeholder="How can we help you?"
+                        required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;"></textarea>
+                </div>
+
+                <button type="submit" class="btn w-100" style="width: 100%;">Submit Inquiry</button>
+            </form>
         </div>
 
-        <div class="card form-card">
-            <form>
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-input" placeholder="John Doe">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-input" placeholder="john@example.com">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <textarea class="form-input" rows="5" placeholder="Your message..."></textarea>
-                </div>
-
-                <button type="button" class="btn w-100">Send Message</button>
-            </form>
+        <!-- Success Message (Same as before but integrated into the layout) -->
+        <div id="successState" class="card"
+            style="display: none; max-width: 600px; margin: 0 auto; padding: 60px; text-align: center;">
+            <div style="font-size: 4rem; margin-bottom: 20px;">✅</div>
+            <h2>Message Sent!</h2>
+            <p>Thank you for reaching out. Our team will contact you within 24 business hours.</p>
+            <button onclick="window.location.reload()" class="btn" style="margin-top: 20px;">New Message</button>
         </div>
     </section>
 
@@ -72,7 +90,7 @@
                 </div>
                 <div>
                     <h4>Legal</h4>
-                    <p class="legal-text">© 2025 Legal Hub.<br>Educational use only.</p>
+                    <p class="legal-text">© 2025 Legal Resource Hub.<br>Educational use only.</p>
                 </div>
             </div>
         </div>
